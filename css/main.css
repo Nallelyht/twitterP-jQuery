@@ -1,0 +1,13 @@
+body {
+	padding-top: 70px;
+}
+.navbar-default{
+	background-color: #6A0874;
+}
+.navbar-header .navbar-text{
+	color: #fff;
+}
+
+.jumbotron{
+	background-color: #e7d3e8;
+}
