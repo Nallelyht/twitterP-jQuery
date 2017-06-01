@@ -1,32 +1,105 @@
-// Cuando carga la página
-window.addEventListener("load", function () {
-	// Envío de To - Do
-	var twitterForm = document.getElementById("twitter-form");
-	twitterForm.addEventListener("submit", function (e) {
+(function () {
+	var contador = 0;
+
+	var cargarPagina = function () {
+		// Envío de TWEED
+		var $mensaje = $("#message");
+		
+		$("#twitter-form").submit(agregarTweet);
+		$mensaje.keyup(validarContenido);
+		$mensaje.keyup(contadorCaracteres);
+	};
+	
+		//contador regresivo de caracreres
+	
+	var contadorCaracteres = function () {
+		
+		var maxCaracteres = 140
+		var $caracteres = $("#type");
+		var $mensaje = $("#message");
+		var caracteresEntrada = $mensaje.val().length;
+		var totalCaracteres = maxCaracteres - caracteresEntrada;
+		
+		$caracteres.text("Te quedan " + totalCaracteres + " de 140 caracteres.")
+		
+		 
+		
+		
+	}
+
+	var agregarTweet = function (e) {
 		e.preventDefault();
 		// Obtenemos datos
-		var contenedor = document.getElementById("posts");
-		var mensajeContenedor = document.getElementById("message");
-		var mensaje = mensajeContenedor.value;
+		var $contenedor = $("#posts");
+		var $mensajeContenedor = $("#message");
+		var $botonAgregar = $("#add-button");
+		var mensaje = $mensajeContenedor.val();
+
+		/*
+			// Obtenemos el contenido de un elemento 
+			.value <> .val()
+			.innerHTML <> .html()
+			.innerText <> .text()
+			.textContent <>
+			// Establecer el contenido de un elemento
+			.value = "" <> .val("")
+			.innerHTML = "" <> .html("")
+			.innerText = "" <> .text()
+			.textContent = ""
+		*/
 
 		// Creamos elementos
-		var postContenedor = document.createElement("article");
-		var post = document.createElement("p");
+		var $postContenedor = $("<article />", { "class": "jumbotron checkbox" });
+		var $postCheck = $("<input type='checkbox' />");
+		var $postTexto = $("<label />");
+
+		var identificador = "marcador-" + contador;
 
 		// Personalizamos elementos
-		postContenedor.className = "jumbotron";
-		post.textContent = mensaje;
+		// $postContenedor.addClass("jumbotron");
+		$postCheck.id = identificador;
+		// $postCheck.type = "checkbox";
+		$postTexto.attr("for", identificador);
+		$postTexto.text(mensaje);
+
+		$postCheck.click(eliminarToDo);
 
 		// Agregarlos al DOM
-		postContenedor.appendChild(post);
+		$postContenedor.append($postCheck);
+		$postContenedor.append($postTexto);
 
 		// Agregarlo a un elemento existente para visualizarlo
-		contenedor.appendChild(postContenedor);
+		// contenedor.appendChild(postContenedor);
+		$contenedor.prepend($postContenedor);
 
 		// Borrar contenido de textarea
-		mensajeContenedor.value = "";
-	});
-});
+		$mensajeContenedor.val("");
+		$botonAgregar.attr("disabled", true);
+
+		// bind, apply, call
+
+		contador++;
+	};
+
+	var eliminarToDo = function () {
+		$(this).parent().remove();
+	};
+
+	var validarContenido = function () {
+		var $addButton = $("#add-button");
+		// .trim() solo borra los espacios de sobra a los costados (izquierda y derecha)
+		if($(this).val().trim().length > 0) {
+			$addButton.removeAttr("disabled");
+		} else {
+			$addButton.attr("disabled", true);
+		}
+	};
+	
+
+
+	// Cuando carga la página
+	$(document).ready(cargarPagina);
+})();
 
 
 
