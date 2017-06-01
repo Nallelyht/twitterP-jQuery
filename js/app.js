@@ -20,7 +20,7 @@
 		var caracteresEntrada = $mensaje.val().length;
 		var totalCaracteres = maxCaracteres - caracteresEntrada;
 		
-		$caracteres.text("Te quedan " + totalCaracteres + " de 140 caracteres.")
+		$caracteres.text("Te quedan " + totalCaracteres + " de 140 caracteres. ")
 		
 		 
 		
