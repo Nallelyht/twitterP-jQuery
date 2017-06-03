@@ -20,6 +20,17 @@
 		var caracteresEntrada = $mensaje.val().length;
 		var totalCaracteres = maxCaracteres - caracteresEntrada;
 		
+		if (caracteresEntrada == 120 ){
+			$caracteres.addClass("label-success");
+		} if (caracteresEntrada == 130){
+			$caracteres.removeClass("label-success").addClass("label-warning")
+		} if (caracteresEntrada == 140){
+			$caracteres.removeClass("label-warning").addClass("label-danger")
+		} if (caracteresEntrada < 140){
+			$caracteres.removeClass("label-danger").addClass("label-warning");
+		} if (caracteresEntrada <130){
+			$caracteres.removeClass("label-warning").addClass("label-success");
+		}
 		$caracteres.text("Te quedan " + totalCaracteres + " de 140 caracteres.")
 		
 		 
