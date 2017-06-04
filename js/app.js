@@ -63,7 +63,7 @@
 		*/
 
 		// Creamos elementos
-		var $postContenedor = $("<article />", { "class": "jumbotron" });
+		var $postContenedor = $("<article />", { "class": "jumbotron container" });
 		var $postCheck = $("<input type='checkbox' />");
 		var $postTexto = $("<label />", {"class": "label"});
 
