@@ -11,3 +11,6 @@ body {
 .jumbotron{
 	background-color: #e7d3e8;
 }
+#posts label{
+	color: #3C0042;
+}
