@@ -4,22 +4,23 @@
 	var cargarPagina = function () {
 		// Envío de TWEED
 		var $mensaje = $("#message");
-		
+
 		$("#twitter-form").submit(agregarTweet);
 		$mensaje.keyup(validarContenido);
 		$mensaje.keyup(contadorCaracteres);
 	};
-	
-		//contador regresivo de caracreres
-	
+
+	//contador regresivo de caracreres
+
 	var contadorCaracteres = function () {
-		
+
 		var maxCaracteres = 140
 		var $caracteres = $("#type");
 		var $mensaje = $("#message");
+		console.log($mensaje);
 		var caracteresEntrada = $mensaje.val().length;
 		var totalCaracteres = maxCaracteres - caracteresEntrada;
-		
+
 		if (caracteresEntrada == 120 ){
 			$caracteres.addClass("label-success");
 		} if (caracteresEntrada == 130){
@@ -31,11 +32,7 @@
 		} if (caracteresEntrada <130){
 			$caracteres.removeClass("label-warning").addClass("label-success");
 		}
-		$caracteres.text("Te quedan " + totalCaracteres + " de 140 caracteres.")
-		
-		 
-		
-		
+		$caracteres.text("Te quedan " + totalCaracteres + " de 140 caracteres.")		  		
 	}
 
 	var agregarTweet = function (e) {
@@ -45,6 +42,9 @@
 		var $mensajeContenedor = $("#message");
 		var $botonAgregar = $("#add-button");
 		var mensaje = $mensajeContenedor.val();
+		/*hora para el tweet*/
+		var tiempo = new Date(); 
+		var hora = tiempo.toLocaleString()
 
 		/*
 			// Obtenemos el contenido de un elemento 
@@ -60,9 +60,9 @@
 		*/
 
 		// Creamos elementos
-		var $postContenedor = $("<article />", { "class": "jumbotron checkbox" });
+		var $postContenedor = $("<article />", { "class": "jumbotron" });
 		var $postCheck = $("<input type='checkbox' />");
-		var $postTexto = $("<label />");
+		var $postTexto = $("<label />", {"class": "label"});
 
 		var identificador = "marcador-" + contador;
 
@@ -71,9 +71,9 @@
 		$postCheck.id = identificador;
 		// $postCheck.type = "checkbox";
 		$postTexto.attr("for", identificador);
-		$postTexto.text(mensaje);
+		$postTexto.html(mensaje + "</br>" + hora);
 
-		$postCheck.click(eliminarToDo);
+		$postCheck.click(eliminarTweet);
 
 		// Agregarlos al DOM
 		$postContenedor.append($postCheck);
@@ -92,7 +92,7 @@
 		contador++;
 	};
 
-	var eliminarToDo = function () {
+	var eliminarTweet = function () {
 		$(this).parent().remove();
 	};
 
@@ -105,17 +105,7 @@
 			$addButton.attr("disabled", true);
 		}
 	};
-	
-
 
 	// Cuando carga la página
 	$(document).ready(cargarPagina);
 })();
-
-
-
-
-
-
-
-
