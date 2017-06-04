@@ -17,16 +17,18 @@
 		var maxCaracteres = 140
 		var $caracteres = $("#type");
 		var $mensaje = $("#message");
-		console.log($mensaje);
+
 		var caracteresEntrada = $mensaje.val().length;
 		var totalCaracteres = maxCaracteres - caracteresEntrada;
+		var $botonAgregar = $("#add-button");
 
 		if (caracteresEntrada == 120 ){
 			$caracteres.addClass("label-success");
 		} if (caracteresEntrada == 130){
-			$caracteres.removeClass("label-success").addClass("label-warning")
-		} if (caracteresEntrada == 140){
-			$caracteres.removeClass("label-warning").addClass("label-danger")
+			$caracteres.removeClass("label-success").addClass("label-warning");
+		} if (caracteresEntrada >=141){
+			$botonAgregar.attr("disabled", true);
+			$caracteres.removeClass("label-warning").addClass("label-danger");
 		} if (caracteresEntrada < 140){
 			$caracteres.removeClass("label-danger").addClass("label-warning");
 		} if (caracteresEntrada <130){
@@ -42,6 +44,7 @@
 		var $mensajeContenedor = $("#message");
 		var $botonAgregar = $("#add-button");
 		var mensaje = $mensajeContenedor.val();
+		var $caracteres = $("#type");
 		/*hora para el tweet*/
 		var tiempo = new Date(); 
 		var hora = tiempo.toLocaleString()
@@ -84,6 +87,7 @@
 		$contenedor.prepend($postContenedor);
 
 		// Borrar contenido de textarea
+		$caracteres.text("");
 		$mensajeContenedor.val("");
 		$botonAgregar.attr("disabled", true);
 
